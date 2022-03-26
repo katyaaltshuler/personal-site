@@ -1,7 +1,7 @@
-import csv
 from flask import Flask, render_template, flash, request
 from flask_bootstrap import Bootstrap
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
 
@@ -14,17 +14,32 @@ Bootstrap(app)
 year = datetime.now().year
 
 
+##CONNECT TO DB
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///guest.db")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+
+class User(db.Model):
+    __tablename__ = "guest-data"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    message = db.Column(db.String(1000))
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == "POST":
-        guest_name = request.form['name']
-        guest_email = request.form['email']
-        guest_msg = request.form['message']
         flash('you\'ve successfully sent a message! ')
-        with open('guest_new_data.csv', mode='a') as f:
-            writer = csv.writer(f)
-            writer.writerow([guest_name, guest_email, guest_msg])
-        return render_template("index.html", year=year, name=guest_name)
+        new_user = User(
+            name=request.form['name'],
+            email=request.form['email'],
+            message=request.form['message'],
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return render_template("index.html", year=year, name=request.form['name'])
     return render_template("index.html", year=year)
 
 
