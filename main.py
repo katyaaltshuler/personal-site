@@ -8,7 +8,7 @@ import os
 load_dotenv('.env')
 dotenv_path = os.path.join
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 Bootstrap(app)
 year = datetime.now().year
