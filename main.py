@@ -21,7 +21,7 @@ def home():
         guest_email = request.form['email']
         guest_msg = request.form['message']
         flash('you\'ve successfully sent a message! ')
-        with open('guest_new_data.csv', mode='w') as f:
+        with open('guest_new_data.csv', mode='a') as f:
             writer = csv.writer(f)
             writer.writerow([guest_name, guest_email, guest_msg])
         return render_template("index.html", year=year, name=guest_name)

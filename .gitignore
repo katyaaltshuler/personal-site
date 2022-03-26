@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask
 
 # Admin file
-guest_data.csv
+.envvar
 
 ### Flask ###
 instance/*
