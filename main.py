@@ -8,7 +8,7 @@ import os
 config = dotenv_values(".env")
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = config["SECRET_KEY"]
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 Bootstrap(app)
 year = datetime.now().year
 
@@ -20,7 +20,7 @@ def home():
         guest_email = request.form['email']
         guest_msg = request.form['message']
         flash('you\'ve successfully sent a message! ')
-        with open(config["PATH"], mode='a') as f:
+        with open(os.getenv("PATH"), mode='a') as f:
             writer = csv.writer(f)
             writer.writerow([guest_name, guest_email, guest_msg])
         return render_template("index.html", year=year, name=guest_name)
@@ -28,4 +28,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=bool(config["DEBUG_MODE"]))
+    app.run(debug=bool(os.getenv("DEBUG_MODE")))
