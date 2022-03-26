@@ -8,7 +8,7 @@ import os
 load_dotenv('.envvar')
 dotenv_path = os.path.join
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", 'default_value')
 
 Bootstrap(app)
 year = datetime.now().year
@@ -29,4 +29,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=bool(os.environ.get("DEBUG_MODE")))
+    app.run(debug=bool(os.getenv("DEBUG_MODE")))
