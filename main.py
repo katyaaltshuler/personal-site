@@ -24,9 +24,10 @@ class User(db.Model):
     __tablename__ = "guest-data"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    email = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=False, nullable=False)
     message = db.Column(db.String(1000))
 
+db.create_all()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
