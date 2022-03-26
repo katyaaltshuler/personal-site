@@ -1,15 +1,15 @@
 import csv
 from flask import Flask, render_template, flash, request
 from flask_bootstrap import Bootstrap
-from flask_ckeditor import CKEditor
 from datetime import datetime
+from dotenv import load_dotenv, dotenv_values
 import os
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hjhbjghkljkvhgv657656v'
-ckeditor = CKEditor(app)
-Bootstrap(app)
+config = dotenv_values(".env")
 
+app = Flask(__name__)
+app.config['SECRET_KEY'] = config["SECRET_KEY"]
+Bootstrap(app)
 year = datetime.now().year
 
 
@@ -20,7 +20,7 @@ def home():
         guest_email = request.form['email']
         guest_msg = request.form['message']
         flash('you\'ve successfully sent a message! ')
-        with open('C://Users//User//Desktop//Story//guest_data.csv', mode='a') as f:
+        with open(config["PATH"], mode='a') as f:
             writer = csv.writer(f)
             writer.writerow([guest_name, guest_email, guest_msg])
         return render_template("index.html", year=year, name=guest_name)
@@ -28,4 +28,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=bool(config["DEBUG_MODE"]))
