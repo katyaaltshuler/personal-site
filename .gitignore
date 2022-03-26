@@ -130,6 +130,7 @@ env.bak/
 venv.bak/
 .env
 
+guest_data.csv
 # Spyder project settings
 .spyderproject
 .spyproject
