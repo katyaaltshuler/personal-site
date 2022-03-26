@@ -27,7 +27,7 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=False, nullable=False)
     message = db.Column(db.String(1000))
 
-db.create_all()
+#db.create_all()
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
