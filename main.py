@@ -29,4 +29,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=bool(os.getenv("DEBUG_MODE")))
+    app.run(debug=bool(os.environ.get("DEBUG_MODE")))
