@@ -5,7 +5,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 import os
 
-load_dotenv('.env')
+load_dotenv('.envvar')
 dotenv_path = os.path.join
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
