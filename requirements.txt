@@ -1,4 +1,5 @@
 gunicorn==20.1.0
+email-validator==1.1.2
 python-dotenv==0.17.1
 Unidecode==1.2.0
 certifi==2021.10.8
