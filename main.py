@@ -5,13 +5,13 @@ from datetime import datetime
 from dotenv import load_dotenv, dotenv_values
 import os
 
-config = dotenv_values(".env")
-
+load_dotenv('.env')
+dotenv_path = os.path.join
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 Bootstrap(app)
 year = datetime.now().year
-
+print(os.getenv("SECRET_KEY"))
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
