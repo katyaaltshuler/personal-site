@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/flask
 # Edit at https://www.toptal.com/developers/gitignore?templates=flask
 
+# Admin file
+guest_data.csv
+
 ### Flask ###
 instance/*
 !instance/.gitignore
@@ -130,7 +133,6 @@ env.bak/
 venv.bak/
 .env
 
-guest_data.csv
 # Spyder project settings
 .spyderproject
 .spyproject
