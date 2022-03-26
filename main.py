@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 Bootstrap(app)
 year = datetime.now().year
-print(os.getenv("SECRET_KEY"))
+print(os.getenv("MY_PATH"))
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
